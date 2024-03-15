@@ -2,4 +2,6 @@
     <string name="app_name">GithubUserApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="searchbar_hint">Dicoding Username</string>
+    <string name="menu_setting" />
+    <string name="GitHubUser" />
 </resources>

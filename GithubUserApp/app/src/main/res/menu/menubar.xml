@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group android:menuCategory="container">
+        <item
+            android:id="@+id/menu1"
+            android:title="@string/menu_setting"
+            app:showAsAction="always"
+            android:icon="@drawable/baseline_build_24">
+        </item>
+    </group>
+</menu>
