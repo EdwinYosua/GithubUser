@@ -1,13 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/txv_github_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-    tools:text="user list" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.HomeFragment">
+
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/txv_githubitem"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="@id/img_avatar"
+        app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+        app:layout_constraintStart_toEndOf="@id/img_avatar"
+        tools:text="contoh" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

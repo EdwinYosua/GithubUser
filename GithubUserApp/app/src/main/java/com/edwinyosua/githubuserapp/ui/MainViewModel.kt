@@ -20,9 +20,10 @@ class MainViewModel : ViewModel() {
         const val TAG = "MainViewModel"
     }
 
-    val listUser = MutableLiveData<ArrayList<ItemsItem>>()
 
+//    fun setUserSearchData(rv: RecyclerView, pgBar: ProgressBar) {
     fun setUserSearchData(query: String, rv: RecyclerView, pgBar: ProgressBar) {
+        showLoading(true,pgBar)
         ApiConfig.getApiService()
             .getGithubData(query)
             .enqueue(object : Callback<GitHubUserResponse> {

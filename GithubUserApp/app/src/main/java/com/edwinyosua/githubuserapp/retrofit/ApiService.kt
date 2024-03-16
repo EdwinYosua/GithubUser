@@ -8,6 +8,7 @@ import retrofit2.http.*
 interface ApiService {
 
     @GET("search/users")
+    @Headers("Authorization: token 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")
     fun getGithubData(
         @Query("q") query: String
     ): Call<GitHubUserResponse>

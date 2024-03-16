@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.edwinyosua.githubuserapp.databinding.GithubItemBinding
 import com.edwinyosua.githubuserapp.data.response.ItemsItem
 
@@ -13,7 +14,12 @@ class UserListAdptr : ListAdapter<ItemsItem, UserListAdptr.UserHolder>(DIFF_CALL
     class UserHolder(private val binding: GithubItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(githubData: ItemsItem) {
-            binding.txvGithubItem.text = "${githubData.login}"
+            binding.txvGithubitem.text = "${githubData.login}"
+
+            Glide.with(itemView)
+                .load("${githubData.avatarUrl}")
+                .centerCrop()
+                .into(binding.imgAvatar)
         }
     }
 
@@ -39,5 +45,6 @@ class UserListAdptr : ListAdapter<ItemsItem, UserListAdptr.UserHolder>(DIFF_CALL
 
         }
     }
+
 
 }

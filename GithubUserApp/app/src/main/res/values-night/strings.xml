@@ -2,4 +2,5 @@
 <resources>
     <string name="menu_setting" />
     <string name="GitHubUser" />
+    <string name="main_actvitiy">MAIN ACTVITIY</string>
 </resources>
