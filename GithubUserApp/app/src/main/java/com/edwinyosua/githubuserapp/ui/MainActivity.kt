@@ -2,7 +2,6 @@ package com.edwinyosua.githubuserapp.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.databinding.ActivityMainBinding

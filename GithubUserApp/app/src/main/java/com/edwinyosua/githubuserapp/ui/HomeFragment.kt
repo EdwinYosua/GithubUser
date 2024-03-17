@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
 
 
@@ -17,9 +15,6 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-
-
 
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,12 +59,12 @@ class HomeFragment : Fragment() {
         }
 
 
-        //Set data in recyclerview
-        viewModel.setUserSearchData(
-            "q",
-            binding.rvReview,
-            binding.progbar
-        )
+//        //Set data in recyclerview when apps open
+//        viewModel.setUserSearchData(
+//            "a",
+//            binding.rvReview,
+//            binding.progbar
+//        )
 
 
         //Searchbar Searchview
@@ -80,6 +75,8 @@ class HomeFragment : Fragment() {
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
                     searchView.hide()
+                    viewModel.setUserSearchData(searchView.text, binding.rvReview, binding.progbar)
+//                    Toast.makeText(requireActivity(), searchView.text, Toast.LENGTH_SHORT).show()
                     false
                 }
         }

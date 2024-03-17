@@ -1,9 +1,9 @@
 package com.edwinyosua.githubuserapp.ui
 
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.edwinyosua.githubuserapp.data.response.GitHubUserResponse
@@ -21,9 +21,9 @@ class MainViewModel : ViewModel() {
     }
 
 
-//    fun setUserSearchData(rv: RecyclerView, pgBar: ProgressBar) {
-    fun setUserSearchData(query: String, rv: RecyclerView, pgBar: ProgressBar) {
-        showLoading(true,pgBar)
+    //    fun setUserSearchData(rv: RecyclerView, pgBar: ProgressBar) {
+    fun setUserSearchData(query: Editable, rv: RecyclerView, pgBar: ProgressBar) {
+        showLoading(true, pgBar)
         ApiConfig.getApiService()
             .getGithubData(query)
             .enqueue(object : Callback<GitHubUserResponse> {
