@@ -6,18 +6,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.edwinyosua.githubuserapp.data.response.ItemsItem
+import com.edwinyosua.githubuserapp.data.response.Item
+//import com.edwinyosua.githubuserapp.data.response.ItemsItem
 import com.edwinyosua.githubuserapp.databinding.GithubItemBinding
 
 
-class UserListAdptr : ListAdapter<ItemsItem, UserListAdptr.UserHolder>(DIFF_CALLBACK) {
+class UserListAdptr : ListAdapter<Item, UserListAdptr.UserHolder>(DIFF_CALLBACK) {
     class UserHolder(private val binding: GithubItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(githubData: ItemsItem) {
-            binding.txvGithubitem.text = "${githubData.login}"
+        fun bind(githubData: Item) {
+            binding.txvGithubitem.text = githubData.login
 
             Glide.with(itemView)
-                .load("${githubData.avatarUrl}")
+                .load(githubData.avatarUrl)
                 .centerCrop()
                 .into(binding.imgAvatar)
         }
@@ -34,12 +35,12 @@ class UserListAdptr : ListAdapter<ItemsItem, UserListAdptr.UserHolder>(DIFF_CALL
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ItemsItem>() {
-            override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Item>() {
+            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
+            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return oldItem == newItem
             }
 

@@ -2,12 +2,11 @@ package com.edwinyosua.githubuserapp.ui
 
 import android.text.Editable
 import android.util.Log
-import android.view.View
-import android.widget.ProgressBar
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
-import com.edwinyosua.githubuserapp.data.response.GitHubUserResponse
-import com.edwinyosua.githubuserapp.data.response.ItemsItem
+import com.edwinyosua.githubuserapp.data.response.GithubUserResponse
+import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,50 +15,49 @@ import retrofit2.Response
 class MainViewModel : ViewModel() {
 
 
-    companion object {
-        const val TAG = "MainViewModel"
-    }
+    private val _userListData = MutableLiveData<List<Item>>()
+    val userListData: LiveData<List<Item>> = _userListData
 
 
-    //    fun setUserSearchData(rv: RecyclerView, pgBar: ProgressBar) {
-    fun setUserSearchData(query: Editable, rv: RecyclerView, pgBar: ProgressBar) {
-        showLoading(true, pgBar)
+    fun loadUserListData(query: Editable) {
         ApiConfig.getApiService()
-            .getGithubData(query)
-            .enqueue(object : Callback<GitHubUserResponse> {
+            .searchUsersList(query)
+            .enqueue(object : Callback<GithubUserResponse> {
                 override fun onResponse(
-                    call: Call<GitHubUserResponse>,
-                    response: Response<GitHubUserResponse>
+                    call: Call<GithubUserResponse>,
+                    response: Response<GithubUserResponse>
                 ) {
-                    showLoading(false, pgBar)
                     if (response.isSuccessful) {
-                        val responseBdy = response.body()
-                        if (responseBdy != null) {
-                            setDataUser(responseBdy.items, rv)
-                        } else {
-                            Log.e(TAG, "onFailure : ${response.message()}")
-                        }
+                        _userListData.value = response.body()?.items
+                    } else {
+                        Log.e("loadUserList", "onFailure : ${response.message()}")
                     }
                 }
-
-                override fun onFailure(call: Call<GitHubUserResponse>, t: Throwable) {
-                    showLoading(false, pgBar)
-                    Log.e(TAG, "onFailure : ${t.message}")
+                override fun onFailure(call: Call<GithubUserResponse>, t: Throwable) {
+                    Log.e("loadUserList", "onFailure : ${t.message}")
                 }
             })
     }
 
-    fun setDataUser(userData: List<ItemsItem?>?, rv: RecyclerView) {
-        val adpt = UserListAdptr()
-        adpt.submitList(userData)
-        rv.adapter = adpt
-    }
+    fun loadAllUserListData() {
+        ApiConfig.getApiService().getAllUserList(perPage = 30, sinceUserId = 0)
+            .enqueue(object : Callback<List<Item>> {
+                override fun onResponse(
+                    call: Call<List<Item>>,
+                    response: Response<List<Item>>
+                ) {
+                    if (response.isSuccessful) {
+                        _userListData.value = response.body()
+                    } else {
+                        Log.e("loadAllUser", "onFailure : ${response.message()}")
+                        _userListData.value = emptyList()
+                    }
+                }
+                override fun onFailure(call: Call<List<Item>>, t: Throwable) {
+                    Log.e("loadAllUser", "onFailure: ${t.message}")
+                    _userListData.value = emptyList()
 
-    fun showLoading(isLoading: Boolean, progbar: ProgressBar) {
-        if (isLoading) {
-            progbar.visibility = View.VISIBLE
-        } else {
-            progbar.visibility = View.GONE
-        }
+                }
+            })
     }
 }

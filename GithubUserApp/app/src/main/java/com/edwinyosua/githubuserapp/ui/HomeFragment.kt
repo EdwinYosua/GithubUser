@@ -1,5 +1,6 @@
 package com.edwinyosua.githubuserapp.ui
 
+//import com.edwinyosua.githubuserapp.data.response.ItemsItem
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
 
 
@@ -27,7 +29,7 @@ class HomeFragment : Fragment() {
 //                val fragMgr = parentFragmentManager
 //                fragMgr.beginTransaction().apply {
 //                    replace(R.id.fragContainer, homeFrag, HomeFragment::class.java.simpleName)
-//                    addToBackStack(null)
+////                    addToBackStack(null)
 //                    commit()
 //                }
 //            }
@@ -48,23 +50,19 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
+
         val layoutMgr = LinearLayoutManager(requireActivity())
+        binding.rvReview.layoutManager = layoutMgr
         val itemDecor = DividerItemDecoration(requireActivity(), layoutMgr.orientation)
+        binding.rvReview.addItemDecoration(itemDecor)
 
 
-
-        binding.apply {
-            rvReview.layoutManager = layoutMgr
-            rvReview.addItemDecoration(itemDecor)
+        //get userlistdata
+        viewModel.userListData.observe(requireActivity()) { userList ->
+            setListUserAdpt(userList)
         }
 
-
-//        //Set data in recyclerview when apps open
-//        viewModel.setUserSearchData(
-//            "a",
-//            binding.rvReview,
-//            binding.progbar
-//        )
+        viewModel.loadAllUserListData()
 
 
         //Searchbar Searchview
@@ -75,11 +73,16 @@ class HomeFragment : Fragment() {
                 .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
                     searchView.hide()
-                    viewModel.setUserSearchData(searchView.text, binding.rvReview, binding.progbar)
-//                    Toast.makeText(requireActivity(), searchView.text, Toast.LENGTH_SHORT).show()
+                    viewModel.loadUserListData(searchView.text)
                     false
                 }
         }
+    }
+
+    private fun setListUserAdpt(userList: List<Item>) {
+        val adpt = UserListAdptr()
+        adpt.submitList(userList)
+        binding.rvReview.adapter = adpt
     }
 
 

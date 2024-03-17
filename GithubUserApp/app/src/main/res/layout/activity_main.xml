@@ -6,11 +6,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
-
-    <TextView
-        android:text="@string/main_actvitiy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </TextView>
-
 </FrameLayout>
