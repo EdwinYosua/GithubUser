@@ -4,4 +4,12 @@
     android:id="@+id/fragContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"></FrameLayout>
+    tools:context=".ui.MainActivity">
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
+        android:name="com.edwinyosua.githubuserapp.ui.HomeFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

@@ -1,14 +1,15 @@
 package com.edwinyosua.githubuserapp.ui
 
-//import com.edwinyosua.githubuserapp.data.response.ItemsItem
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
 
@@ -17,6 +18,24 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+
+//        override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+////to handle device back button
+//        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                val homeFrag = HomeFragment()
+//                val fragMgr = parentFragmentManager
+//                fragMgr.beginTransaction().apply {
+//                    replace(R.id.fragContainer, homeFrag, HomeFragment::class.java.simpleName)
+//                    addToBackStack(null)
+//                    commit()
+//                }
+//            }
+//        })
+//    }
 
 
     override fun onCreateView(
@@ -74,6 +93,4 @@ class HomeFragment : Fragment() {
     private fun showLoading(isLoading: Boolean) {
         binding.progbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
-
 }
