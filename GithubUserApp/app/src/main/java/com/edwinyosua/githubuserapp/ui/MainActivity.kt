@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("HomeFragment", "Fragment Name : " + HomeFragment::class.java.simpleName)
             fragMgr.beginTransaction().apply {
                 replace(R.id.fragContainer, homeFrag, HomeFragment::class.java.simpleName)
-                addToBackStack(null)
+//                addToBackStack(null)
                 commit()
             }
         }

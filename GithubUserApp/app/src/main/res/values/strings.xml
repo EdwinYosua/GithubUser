@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">GithubUserApp</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="searchbar_hint">Dicoding Username</string>
+    <string name="searchbar_hint">Search Username</string>
     <string name="menu_setting" />
     <string name="GitHubUser" />
     <string name="main_actvitiy">MAIN ACTVITIY</string>

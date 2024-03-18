@@ -19,24 +19,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-////to handle device back button
-//        activity?.onBackPressedDispatcher?.addCallback(requireActivity(), object : OnBackPressedCallback(true){
-//            override fun handleOnBackPressed() {
-//                val homeFrag = HomeFragment()
-//                val fragMgr = parentFragmentManager
-//                fragMgr.beginTransaction().apply {
-//                    replace(R.id.fragContainer, homeFrag, HomeFragment::class.java.simpleName)
-////                    addToBackStack(null)
-//                    commit()
-//                }
-//            }
-//        })
-//    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,20 +32,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
-        val layoutMgr = LinearLayoutManager(requireActivity())
-        binding.rvReview.layoutManager = layoutMgr
-        val itemDecor = DividerItemDecoration(requireActivity(), layoutMgr.orientation)
-        binding.rvReview.addItemDecoration(itemDecor)
+        setReyclerView()
 
 
         //get userlistdata
-        viewModel.userListData.observe(requireActivity()) { userList ->
+        viewModel.userListData.observe(viewLifecycleOwner) { userList ->
             setListUserAdpt(userList)
         }
 
-        viewModel.loadAllUserListData()
-
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
 
         //Searchbar Searchview
         with(binding) {
@@ -83,6 +62,17 @@ class HomeFragment : Fragment() {
         val adpt = UserListAdptr()
         adpt.submitList(userList)
         binding.rvReview.adapter = adpt
+    }
+
+    private fun setReyclerView() {
+        val layoutMgr = LinearLayoutManager(requireActivity())
+        binding.rvReview.layoutManager = layoutMgr
+        val itemDecor = DividerItemDecoration(requireActivity(), layoutMgr.orientation)
+        binding.rvReview.addItemDecoration(itemDecor)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progbar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
 
