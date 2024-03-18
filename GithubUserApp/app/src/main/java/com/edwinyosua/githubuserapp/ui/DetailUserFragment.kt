@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.edwinyosua.githubuserapp.R
+import com.edwinyosua.githubuserapp.databinding.FragmentDetailUserBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserFragment : Fragment() {
 
+    private var _binding: FragmentDetailUserBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         @StringRes
@@ -24,8 +30,19 @@ class DetailUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_user, container, false)
+        _binding = FragmentDetailUserBinding.inflate(inflater, container, false)
+        return binding.root
+
+
+        val detailPagerAdptr = DetailPagerAdptr(requireActivity())
+        val viewPager: ViewPager2 = binding.viewPager
+        viewPager.adapter = detailPagerAdptr
+        val tabs: TabLayout = binding.tabLayout
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+//        supportActionBar?.elevation = 0f
+
+
     }
-
-
 }
