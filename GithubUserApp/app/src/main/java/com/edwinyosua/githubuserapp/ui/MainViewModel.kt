@@ -63,7 +63,7 @@ class MainViewModel : ViewModel() {
                     _isLoading.value = false
                     if (response.isSuccessful) {
                         _userListData.postValue(response.body())
-                        Log.d("loadAll","onSuccess : Load All Data User")
+                        Log.d("loadAll", "onSuccess : Load All Data User")
                     } else {
                         Log.e("loadAllUser", "onFailure : ${response.message()}")
 //                        _userListData.value = emptyList()
