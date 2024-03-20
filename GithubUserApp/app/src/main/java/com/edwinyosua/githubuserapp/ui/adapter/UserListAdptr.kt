@@ -1,4 +1,4 @@
-package com.edwinyosua.githubuserapp.ui
+package com.edwinyosua.githubuserapp.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.edwinyosua.githubuserapp.data.response.GithubUserResponse
 import com.edwinyosua.githubuserapp.data.response.Item
-//import com.edwinyosua.githubuserapp.data.response.ItemsItem
 import com.edwinyosua.githubuserapp.databinding.GithubItemBinding
 
 
 class UserListAdptr : ListAdapter<Item, UserListAdptr.UserHolder>(DIFF_CALLBACK) {
+
+    private lateinit var onUserClick: OnUserClick
+
     class UserHolder(private val binding: GithubItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(githubData: Item) {
@@ -22,6 +25,7 @@ class UserListAdptr : ListAdapter<Item, UserListAdptr.UserHolder>(DIFF_CALLBACK)
                 .centerCrop()
                 .into(binding.imgAvatar)
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserHolder {
@@ -32,6 +36,7 @@ class UserListAdptr : ListAdapter<Item, UserListAdptr.UserHolder>(DIFF_CALLBACK)
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val githubData = getItem(position)
         holder.bind(githubData)
+
     }
 
     companion object {
@@ -43,8 +48,15 @@ class UserListAdptr : ListAdapter<Item, UserListAdptr.UserHolder>(DIFF_CALLBACK)
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return oldItem == newItem
             }
-
         }
+    }
+
+    interface OnUserClick {
+        fun onUserClicked(user: GithubUserResponse)
+    }
+
+    private fun setOnUserClick(onUserClick: OnUserClick) {
+        this.onUserClick = onUserClick
     }
 
 

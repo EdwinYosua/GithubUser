@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
+import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
 
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var userAdptr: UserRecycleAdptr
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,17 +48,23 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        setReyclerView()
+
+
+        setRecyclerView()
 
 
         //get userlistdata
         viewModel.userListData.observe(viewLifecycleOwner) { userList ->
-            setListUserAdpt(userList)
+            userAdptr.setList(userList)
         }
+        userAdptr = UserRecycleAdptr()
+        binding.rvReview.adapter = userAdptr
+
 
         viewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
+
 
         //Searchbar Searchview
         with(binding) {
@@ -73,18 +80,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setListUserAdpt(userList: List<Item>) {
-        val adpt = UserListAdptr()
-        adpt.submitList(userList)
-        binding.rvReview.adapter = adpt
-    }
 
-    private fun setReyclerView() {
+    private fun setRecyclerView() {
         val layoutMgr = LinearLayoutManager(requireActivity())
         binding.rvReview.layoutManager = layoutMgr
         val itemDecor = DividerItemDecoration(requireActivity(), layoutMgr.orientation)
         binding.rvReview.addItemDecoration(itemDecor)
     }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progbar.visibility = if (isLoading) View.VISIBLE else View.GONE

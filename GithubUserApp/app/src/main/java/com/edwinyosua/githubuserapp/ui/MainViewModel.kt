@@ -39,7 +39,7 @@ class MainViewModel : ViewModel() {
                     _isLoading.value = false
                     if (response.isSuccessful) {
                         _userListData.value = response.body()?.items
-
+                        Log.d("LoadUserList", "Success")
                     } else {
                         Log.e("loadUserList", "onFailure : ${response.message()}")
                     }
