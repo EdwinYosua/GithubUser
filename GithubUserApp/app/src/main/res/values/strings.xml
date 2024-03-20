@@ -10,4 +10,5 @@
     <string name="image_detail">image detail</string>
     <string name="follower">Follower</string>
     <string name="following">Following</string>
+    <string name="img_user" />
 </resources>
