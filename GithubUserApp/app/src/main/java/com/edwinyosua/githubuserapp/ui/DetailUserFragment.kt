@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.databinding.FragmentDetailUserBinding
-import com.google.android.material.tabs.TabLayout
+import com.edwinyosua.githubuserapp.ui.adapter.DetailPagerAdptr
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailUserFragment : Fragment() {
@@ -25,6 +25,7 @@ class DetailUserFragment : Fragment() {
         )
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,17 +33,19 @@ class DetailUserFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDetailUserBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
 
-        val detailPagerAdptr = DetailPagerAdptr(requireActivity())
+
+        val detailPagerAdptr = DetailPagerAdptr(requireContext(), Bundle() )
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = detailPagerAdptr
-        val tabs: TabLayout = binding.tabLayout
-        TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
+
+        TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
+            tab.text = getString(TAB_TITLES[position])
         }.attach()
-//        supportActionBar?.elevation = 0f
-
-
     }
 }

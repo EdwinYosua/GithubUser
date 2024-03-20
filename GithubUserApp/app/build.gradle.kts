@@ -41,7 +41,6 @@ android {
 
 dependencies {
 
-
     implementation(libs.glide)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -53,7 +52,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     // Lifecycles only (without ViewModel or LiveData)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.viewpager2)
 
