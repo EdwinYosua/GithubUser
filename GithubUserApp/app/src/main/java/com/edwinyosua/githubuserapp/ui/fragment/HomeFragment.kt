@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edwinyosua.githubuserapp.R
+import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
 import com.edwinyosua.githubuserapp.ui.MainViewModel
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr

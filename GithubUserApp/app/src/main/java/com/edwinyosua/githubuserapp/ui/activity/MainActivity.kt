@@ -1,5 +1,6 @@
 package com.edwinyosua.githubuserapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edwinyosua.githubuserapp.R
+import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.ActivityMainBinding
 import com.edwinyosua.githubuserapp.ui.MainViewModel
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+
         viewModel.isLoading.observe(this) {
             showLoading(it)
         }
@@ -41,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         userAdptr = UserRecycleAdptr()
         binding.rvList.adapter = userAdptr
 
+        setItemClick()
 
         //Set Searchview
         with(binding) {
@@ -54,6 +58,17 @@ class MainActivity : AppCompatActivity() {
                     false
                 }
         }
+    }
+
+    private fun setItemClick() {
+        userAdptr.setOnUserClick(object : UserRecycleAdptr.OnUserClick {
+            override fun onUserClicked(item: Item) {
+                startActivity(Intent(
+                    this@MainActivity,
+                    DetailActivity::class.java
+                ))
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
