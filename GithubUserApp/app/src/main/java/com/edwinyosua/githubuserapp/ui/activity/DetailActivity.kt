@@ -3,11 +3,13 @@ package com.edwinyosua.githubuserapp.ui.activity
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.viewpager2.widget.ViewPager2
 import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.databinding.ActivityDetailBinding
-import com.edwinyosua.githubuserapp.ui.activity.DetailActivity.Companion.TAB_TITLES
 import com.edwinyosua.githubuserapp.ui.adapter.DetailPagerAdptr
+import com.edwinyosua.githubuserapp.ui.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailActivity : AppCompatActivity() {
@@ -26,10 +28,20 @@ class DetailActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var viewMdl: DetailViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val userName = intent.getStringExtra(EXTRA_USERNAME)
+        viewMdl = ViewModelProvider(this).get(DetailViewModel::class.java)
+
+        if (userName != null) {
+            viewMdl.loadClickedUsers(userName)
+            binding.txvUserName.text = userName
+        }
 
         setTabLayout()
     }
