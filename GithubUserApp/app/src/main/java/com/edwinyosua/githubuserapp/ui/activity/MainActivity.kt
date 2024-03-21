@@ -1,6 +1,7 @@
 package com.edwinyosua.githubuserapp.ui.activity
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -21,17 +22,32 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        enableEdgeToEdge()
         setContentView(binding.root)
 
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
+        //set recyclerview
         setRecycleV()
         viewModel.userListData.observe(this){ userList ->
             userAdptr.setList(userList)
         }
         userAdptr = UserRecycleAdptr()
         binding.rvList.adapter = userAdptr
+
+
+        //Set Searchview
+        with(binding) {
+            searchView.setupWithSearchBar(searchBar)
+            searchView
+                .editText
+                .setOnEditorActionListener {textView, actionId, event ->
+                    searchBar.setText(searchView.text)
+                    searchView.hide()
+                    viewModel.loadUserListData(searchView.text)
+                    false
+                }
+        }
     }
 
     private fun setRecycleV() {
