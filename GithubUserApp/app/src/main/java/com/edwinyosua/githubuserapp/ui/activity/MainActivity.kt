@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         userAdptr = UserRecycleAdptr()
         binding.rvList.adapter = userAdptr
 
+
+        //Set clickable item
         setItemClick()
 
         //Set Searchview
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 }
         }
     }
+
 
     private fun setItemClick() {
         userAdptr.setOnUserClick(object : UserRecycleAdptr.OnUserClick {

@@ -17,17 +17,17 @@ class DetailUserFragment : Fragment() {
     private var _binding: FragmentDetailUserBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-
-        const val EXTRA_USERNAME = "extra_username"
-
-
-        @StringRes
-        private val TAB_TITLES = intArrayOf(
-            R.string.follower,
-            R.string.following
-        )
-    }
+//    companion object {
+//
+//        const val EXTRA_USERNAME = "extra_username"
+//
+//
+//        @StringRes
+//        private val TAB_TITLES = intArrayOf(
+//            R.string.follower,
+//            R.string.following
+//        )
+//    }
 
 
     override fun onCreateView(
@@ -39,20 +39,20 @@ class DetailUserFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        setTabLayout()
+//    }
 
-        setTabLayout()
-    }
-
-    private fun setTabLayout() {
-
-        val detailPagerAdptr = DetailPagerAdptr(requireContext(), Bundle())
-        val viewPager: ViewPager2 = binding.viewPager
-        viewPager.adapter = detailPagerAdptr
-
-        TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
-            tab.text = getString(TAB_TITLES[position])
-        }.attach()
-    }
+//    private fun setTabLayout() {
+//
+//        val detailPagerAdptr = DetailPagerAdptr(requireContext(), Bundle())
+//        val viewPager: ViewPager2 = binding.viewPager
+//        viewPager.adapter = detailPagerAdptr
+//
+//        TabLayoutMediator(binding.tabLayout, viewPager) { tab, position ->
+//            tab.text = getString(TAB_TITLES[position])
+//        }.attach()
+//    }
 }
