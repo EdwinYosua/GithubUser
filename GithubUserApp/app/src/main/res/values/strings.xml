@@ -11,4 +11,6 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="img_user" />
+    <string name="name">name</string>
+    <string name="username">username</string>
 </resources>

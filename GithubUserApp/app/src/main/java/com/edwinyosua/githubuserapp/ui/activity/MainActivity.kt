@@ -3,25 +3,19 @@ package com.edwinyosua.githubuserapp.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.ActivityMainBinding
-import com.edwinyosua.githubuserapp.ui.MainViewModel
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
-import com.edwinyosua.githubuserapp.ui.fragment.HomeFragment
+import com.edwinyosua.githubuserapp.ui.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var userAdptr : UserRecycleAdptr
+    private lateinit var userAdptr: UserRecycleAdptr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -38,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         //set recyclerview
         setRecycleV()
-        viewModel.userListData.observe(this){ userList ->
+        viewModel.userListData.observe(this) { userList ->
             userAdptr.setList(userList)
         }
         userAdptr = UserRecycleAdptr()
@@ -66,10 +60,11 @@ class MainActivity : AppCompatActivity() {
     private fun setItemClick() {
         userAdptr.setOnUserClick(object : UserRecycleAdptr.OnUserClick {
             override fun onUserClicked(item: Item) {
-                startActivity(Intent(
-                    this@MainActivity,
-                    DetailActivity::class.java
-                ))
+                startActivity(
+                    Intent(this@MainActivity, DetailActivity::class.java)
+                        .putExtra(DetailActivity.EXTRA_USERNAME, item.login)
+                )
+
             }
         })
     }
@@ -84,4 +79,5 @@ class MainActivity : AppCompatActivity() {
         val itemDcor = DividerItemDecoration(this, layoutMgr.orientation)
         binding.rvList.addItemDecoration(itemDcor)
     }
+
 }

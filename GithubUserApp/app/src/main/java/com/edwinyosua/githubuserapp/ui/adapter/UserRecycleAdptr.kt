@@ -19,6 +19,10 @@ class UserRecycleAdptr : RecyclerView.Adapter<UserRecycleAdptr.UserListHolder>()
     private var onUserClick : OnUserClick? = null
 
 
+    fun setOnUserClick(listener: OnUserClick) {
+        this.onUserClick = listener
+    }
+
     fun setList(list: List<Item>) {
         val diffCallBack = DiffCallBackUtil(userList, list)
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
@@ -64,8 +68,6 @@ class UserRecycleAdptr : RecyclerView.Adapter<UserRecycleAdptr.UserListHolder>()
         fun onUserClicked(item : Item)
     }
 
-    fun setOnUserClick(listener: OnUserClick) {
-        this.onUserClick = listener
-    }
+
 
 }

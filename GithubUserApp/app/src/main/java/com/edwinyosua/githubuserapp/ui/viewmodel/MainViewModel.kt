@@ -1,4 +1,4 @@
-package com.edwinyosua.githubuserapp.ui
+package com.edwinyosua.githubuserapp.ui.viewmodel
 
 import android.text.Editable
 import android.util.Log
