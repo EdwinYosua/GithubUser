@@ -13,7 +13,6 @@ import retrofit2.Response
 class DetailViewModel : ViewModel() {
 
     private val _users = MutableLiveData<DetailUsersResponse>()
-//    val users: LiveData<DetailUsersResponse> = _users
 
     fun loadClickedUsers(username: String) {
         val client = ApiConfig.getApiService().getClickedUser(username)
