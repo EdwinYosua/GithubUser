@@ -27,16 +27,7 @@
                 app:title="@string/app_name" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <ProgressBar
-            android:id="@+id/prog_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -85,6 +76,17 @@
             app:layout_constraintTop_toBottomOf="@id/search_bar">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <ProgressBar
+            android:id="@+id/prog_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

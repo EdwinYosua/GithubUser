@@ -1,6 +1,7 @@
 package com.edwinyosua.githubuserapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,11 +23,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+
+        viewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
+
         //set recyclerview
         setRecycleV()
         viewModel.userListData.observe(this){ userList ->
@@ -41,13 +47,17 @@ class MainActivity : AppCompatActivity() {
             searchView.setupWithSearchBar(searchBar)
             searchView
                 .editText
-                .setOnEditorActionListener {textView, actionId, event ->
+                .setOnEditorActionListener { textView, actionId, event ->
                     searchBar.setText(searchView.text)
                     searchView.hide()
                     viewModel.loadUserListData(searchView.text)
                     false
                 }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun setRecycleV() {
