@@ -1,4 +1,4 @@
-package com.edwinyosua.githubuserapp.ui
+package com.edwinyosua.githubuserapp.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.edwinyosua.githubuserapp.R
 
-
-class FollowerFragment : Fragment() {
+class FollowingFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,7 +15,7 @@ class FollowerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_follower, container, false)
+        return inflater.inflate(R.layout.fragment_following, container, false)
     }
 
 }

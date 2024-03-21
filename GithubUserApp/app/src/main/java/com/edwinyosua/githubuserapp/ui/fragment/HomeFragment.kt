@@ -1,16 +1,21 @@
-package com.edwinyosua.githubuserapp.ui
+package com.edwinyosua.githubuserapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edwinyosua.githubuserapp.R
+import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.FragmentHomeBinding
+import com.edwinyosua.githubuserapp.ui.MainViewModel
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
 
 
@@ -20,19 +25,18 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var userAdptr: UserRecycleAdptr
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        //to handle device back button
-        activity?.onBackPressedDispatcher?.addCallback(
-            requireActivity(),
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    onPressedBackButtonHandle()
-                }
-            })
-    }
+//
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        //to handle device back button
+//        activity?.onBackPressedDispatcher?.addCallback(
+//            requireActivity(),
+//            object : OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                    parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+//                }
+//            })
+//    }
 
 
     override fun onCreateView(
@@ -42,6 +46,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,6 +72,8 @@ class HomeFragment : Fragment() {
         }
 
 
+        setItemClick()
+
         //Searchbar Searchview
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
@@ -78,6 +86,24 @@ class HomeFragment : Fragment() {
                     false
                 }
         }
+    }
+
+
+    private fun setItemClick() {
+        userAdptr.setOnUserClick(object : UserRecycleAdptr.OnUserClick {
+            override fun onUserClicked(item: Item) {
+                val detailFrag = DetailUserFragment()
+                val fragMgr = requireActivity().supportFragmentManager
+                fragMgr.beginTransaction().apply {
+                    replace(
+                        R.id.fragContainer,
+                        detailFrag
+                    )
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+        })
     }
 
 
@@ -107,6 +133,8 @@ class HomeFragment : Fragment() {
         intent.addCategory(Intent.CATEGORY_HOME)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+        Log.d("navigateHome","onSuccess")
     }
+
 }
 

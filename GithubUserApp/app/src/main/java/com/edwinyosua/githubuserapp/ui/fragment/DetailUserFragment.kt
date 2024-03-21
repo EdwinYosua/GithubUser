@@ -1,4 +1,4 @@
-package com.edwinyosua.githubuserapp.ui
+package com.edwinyosua.githubuserapp.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +18,10 @@ class DetailUserFragment : Fragment() {
     private val binding get() = _binding!!
 
     companion object {
+
+        const val EXTRA_USERNAME = "extra_username"
+
+
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.follower,
@@ -38,9 +42,12 @@ class DetailUserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setTabLayout()
+    }
 
+    private fun setTabLayout() {
 
-        val detailPagerAdptr = DetailPagerAdptr(requireContext(), Bundle() )
+        val detailPagerAdptr = DetailPagerAdptr(requireContext(), Bundle())
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = detailPagerAdptr
 

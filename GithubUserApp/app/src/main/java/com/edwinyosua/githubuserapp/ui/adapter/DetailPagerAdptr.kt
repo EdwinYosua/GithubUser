@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.edwinyosua.githubuserapp.R
-import com.edwinyosua.githubuserapp.ui.FollowerFragment
-import com.edwinyosua.githubuserapp.ui.FollowingFragment
+import com.edwinyosua.githubuserapp.ui.fragment.FollowerFragment
+import com.edwinyosua.githubuserapp.ui.fragment.FollowingFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
