@@ -17,6 +17,7 @@ class DetailActivity : AppCompatActivity() {
     companion object {
 
         const val EXTRA_USERNAME = "extra_username"
+        const val EXTRA_USER_NAME = "extra_user_name"
 
 
         @StringRes
@@ -35,15 +36,26 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val userName = intent.getStringExtra(EXTRA_USERNAME)
+        setTabLayout()
         viewMdl = ViewModelProvider(this).get(DetailViewModel::class.java)
 
-        if (userName != null) {
-            viewMdl.loadClickedUsers(userName)
-            binding.txvUserName.text = userName
-        }
 
-        setTabLayout()
+
+        val userName = intent.getStringExtra(EXTRA_USERNAME)
+        getUsersData(userName)
+
+        viewMdl.users.observe(this) { user ->
+            binding.apply {
+                txvUserName.text = user.login
+                txvName.text = user.name
+            }
+        }
+    }
+
+    private fun getUsersData(username: String?) {
+        username?.let {
+            viewMdl.loadClickedUsers(it)
+        }
     }
 
     private fun setTabLayout() {

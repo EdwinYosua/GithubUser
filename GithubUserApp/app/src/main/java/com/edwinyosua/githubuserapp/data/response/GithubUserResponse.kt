@@ -49,5 +49,7 @@ data class Item(
     @SerializedName("type")
     val type: String,
     @SerializedName("url")
-    val url: String
+    val url: String,
+    @field:SerializedName("name")
+    val name: String? = null,
 )
