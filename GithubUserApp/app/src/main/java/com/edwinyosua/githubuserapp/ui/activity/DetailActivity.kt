@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.databinding.ActivityDetailBinding
 import com.edwinyosua.githubuserapp.ui.adapter.DetailPagerAdptr
@@ -48,6 +50,11 @@ class DetailActivity : AppCompatActivity() {
             binding.apply {
                 txvUserName.text = user.login
                 txvName.text = user.name
+
+                Glide.with(this@DetailActivity)
+                    .load(user.avatarUrl)
+                    .transform(CircleCrop())
+                    .into(imgDetail)
             }
         }
     }
