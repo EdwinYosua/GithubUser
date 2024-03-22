@@ -50,6 +50,8 @@ class DetailActivity : AppCompatActivity() {
             binding.apply {
                 txvUserName.text = user.login
                 txvName.text = user.name
+                txvFollower.text = user.followers
+                txvFollowing.text = user.following.toString()
 
                 Glide.with(this@DetailActivity)
                     .load(user.avatarUrl)
