@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -37,12 +36,17 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setTabLayout()
+        val userName = intent.getStringExtra(EXTRA_USERNAME)
+
+
+        val bundle = Bundle().apply {
+            putString(EXTRA_USERNAME, userName)
+        }
+
+        setTabLayout(bundle)
         viewMdl = ViewModelProvider(this).get(DetailViewModel::class.java)
 
 
-
-        val userName = intent.getStringExtra(EXTRA_USERNAME)
         getUsersData(userName)
 
         viewMdl.users.observe(this) { user ->
@@ -50,7 +54,7 @@ class DetailActivity : AppCompatActivity() {
                 txvUserName.text = user.login
                 txvName.text = user.name
                 txvFollower.text = user.followers
-                txvFollowing.text = user.following.toString()
+                txvFollowing.text = user.following
 
                 Glide.with(this@DetailActivity)
                     .load(user.avatarUrl)
@@ -65,13 +69,12 @@ class DetailActivity : AppCompatActivity() {
     private fun getUsersData(username: String?) {
         username?.let {
             viewMdl.loadClickedUsers(it)
-            viewMdl.getFollowerList(it)
         }
     }
 
-    private fun setTabLayout() {
+    private fun setTabLayout(bundle : Bundle) {
         val viewPgr: ViewPager2 = binding.viewPager
-        viewPgr.adapter = DetailPagerAdptr(this@DetailActivity, Bundle())
+        viewPgr.adapter = DetailPagerAdptr(this, bundle)
         TabLayoutMediator(binding.tabLayout, viewPgr) { tab, position ->
             tab.text = getString(TAB_TITLES[position])
         }.attach()

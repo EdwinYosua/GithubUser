@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                     Intent(this@MainActivity, DetailActivity::class.java)
                         .putExtra(DetailActivity.EXTRA_USERNAME, item.login)
                 )
-
             }
         })
     }

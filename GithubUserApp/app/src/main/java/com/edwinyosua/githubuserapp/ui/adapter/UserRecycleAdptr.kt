@@ -33,7 +33,6 @@ class UserRecycleAdptr : RecyclerView.Adapter<UserRecycleAdptr.UserListHolder>()
 
     }
 
-
     class UserListHolder(v: View) : RecyclerView.ViewHolder(v) {
         val userName: TextView = v.findViewById(R.id.txv_githubitem)
         val userImg: ImageView = v.findViewById(R.id.img_avatar)
