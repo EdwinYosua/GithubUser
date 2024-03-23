@@ -63,10 +63,28 @@ class DetailViewModel : ViewModel() {
                 override fun onFailure(call: Call<List<DetailUsersResponse>>, t: Throwable) {
                     Log.e("getFollowerList","onFailure : ${t.message}")
                 }
-
             })
+    }
 
+    fun getFollowingList(username: String) {
+        ApiConfig.getApiService().getFollowing(username)
+            .enqueue(object : Callback<List<DetailUsersResponse>> {
+                override fun onResponse(
+                    call: Call<List<DetailUsersResponse>>,
+                    response: Response<List<DetailUsersResponse>>
+                ) {
+                    if(response.isSuccessful) {
+                        _followingList.value = response.body()
+                        Log.d("getFollowingList", "Success")
+                    } else {
+                        Log.e("getFollowingList", "onFailure : ${response.message()}")
+                    }
+                }
 
+                override fun onFailure(call: Call<List<DetailUsersResponse>>, t: Throwable) {
+                    Log.e("getFollowingList","onFailure : ${t.message}")
+                }
+            })
     }
 
 }

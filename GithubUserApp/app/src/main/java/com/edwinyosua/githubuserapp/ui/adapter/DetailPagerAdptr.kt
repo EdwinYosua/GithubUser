@@ -23,8 +23,6 @@ class DetailPagerAdptr(private val context: Context, private val bundle: Bundle)
         R.string.following
     )
 
-    var username: String  = ""
-
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {

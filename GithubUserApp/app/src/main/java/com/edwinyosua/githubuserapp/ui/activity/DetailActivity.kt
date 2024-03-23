@@ -19,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
 
         const val EXTRA_USERNAME = "extra_username"
 
-
         @StringRes
         private val TAB_TITLES = intArrayOf(
             R.string.follower,
@@ -45,7 +44,6 @@ class DetailActivity : AppCompatActivity() {
 
         setTabLayout(bundle)
         viewMdl = ViewModelProvider(this).get(DetailViewModel::class.java)
-
 
         getUsersData(userName)
 
