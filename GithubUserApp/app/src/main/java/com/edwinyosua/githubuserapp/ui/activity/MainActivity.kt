@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(
                     Intent(this@MainActivity, DetailActivity::class.java)
                         .putExtra(DetailActivity.EXTRA_USERNAME, item.login)
-                        .putExtra(DetailActivity.EXTRA_USER_NAME, item.name)
                 )
 
             }

@@ -31,4 +31,17 @@ interface ApiService {
     fun getClickedUser(
         @Path("username") username: String
     ): Call<DetailUsersResponse>
+
+    @GET("users/{username}/followers")
+    @Headers("Authorization: token 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")
+    fun getFollowers(
+        @Path("username") username: String
+    ): Call<List<DetailUsersResponse>>
+
+    @GET("users/{username}/following")
+    @Headers("Authorization: token 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")
+    fun getFollowing(
+        @Path("username") username: String
+    ): Call<List<DetailUsersResponse>>
+
 }

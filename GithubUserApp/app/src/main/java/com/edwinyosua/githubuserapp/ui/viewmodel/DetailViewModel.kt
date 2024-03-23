@@ -10,10 +10,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class DetailViewModel : ViewModel() {
 
     private val _users = MutableLiveData<DetailUsersResponse>()
-    val users : LiveData<DetailUsersResponse> = _users
+    val users: LiveData<DetailUsersResponse> = _users
+
+    private val _followerList = MutableLiveData<DetailUsersResponse>()
+    val followerList: LiveData<DetailUsersResponse> = _followerList
+
+    private val _followingList = MutableLiveData<List<DetailUsersResponse>>()
+    val followingList: LiveData<List<DetailUsersResponse>> = _followingList
+
 
     fun loadClickedUsers(username: String) {
         val client = ApiConfig.getApiService().getClickedUser(username)
@@ -34,6 +42,30 @@ class DetailViewModel : ViewModel() {
                 Log.e("LoadClickedUsers", "onFailure : ${t.message}")
             }
         })
+    }
+
+    fun getFollowerList(username: String) {
+        ApiConfig.getApiService().getFollowers(username)
+            .enqueue(object : Callback<List<DetailUsersResponse>> {
+                override fun onResponse(
+                    call: Call<List<DetailUsersResponse>>,
+                    response: Response<List<DetailUsersResponse>>
+                ) {
+                    if (response.isSuccessful) {
+                        _followerList.value = response.body() as DetailUsersResponse?
+                        Log.d("getFollowerList", "Success")
+                    } else {
+                        Log.e("getFollowerList", "onFailure : ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<List<DetailUsersResponse>>, t: Throwable) {
+                    Log.e("getFollowerList","onFailure : ${t.message}")
+                }
+
+            })
+
+
     }
 
 }

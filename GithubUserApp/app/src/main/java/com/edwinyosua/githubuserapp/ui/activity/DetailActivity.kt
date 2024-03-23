@@ -19,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     companion object {
 
         const val EXTRA_USERNAME = "extra_username"
-        const val EXTRA_USER_NAME = "extra_user_name"
 
 
         @StringRes
@@ -59,18 +58,20 @@ class DetailActivity : AppCompatActivity() {
                     .into(imgDetail)
             }
         }
+
+
     }
 
     private fun getUsersData(username: String?) {
         username?.let {
             viewMdl.loadClickedUsers(it)
+            viewMdl.getFollowerList(it)
         }
     }
 
     private fun setTabLayout() {
         val viewPgr: ViewPager2 = binding.viewPager
         viewPgr.adapter = DetailPagerAdptr(this@DetailActivity, Bundle())
-
         TabLayoutMediator(binding.tabLayout, viewPgr) { tab, position ->
             tab.text = getString(TAB_TITLES[position])
         }.attach()
