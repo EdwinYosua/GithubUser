@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.edwinyosua.githubuserapp.data.response.DetailUsersResponse
-import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,7 +60,7 @@ class DetailViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<List<DetailUsersResponse>>, t: Throwable) {
-                    Log.e("getFollowerList","onFailure : ${t.message}")
+                    Log.e("getFollowerList", "onFailure : ${t.message}")
                 }
             })
     }
@@ -73,7 +72,7 @@ class DetailViewModel : ViewModel() {
                     call: Call<List<DetailUsersResponse>>,
                     response: Response<List<DetailUsersResponse>>
                 ) {
-                    if(response.isSuccessful) {
+                    if (response.isSuccessful) {
                         _followingList.value = response.body()
                         Log.d("getFollowingList", "Success")
                     } else {
@@ -82,7 +81,7 @@ class DetailViewModel : ViewModel() {
                 }
 
                 override fun onFailure(call: Call<List<DetailUsersResponse>>, t: Throwable) {
-                    Log.e("getFollowingList","onFailure : ${t.message}")
+                    Log.e("getFollowingList", "onFailure : ${t.message}")
                 }
             })
     }

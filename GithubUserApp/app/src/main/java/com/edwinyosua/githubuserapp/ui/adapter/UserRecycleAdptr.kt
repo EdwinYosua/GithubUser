@@ -16,7 +16,7 @@ import com.edwinyosua.githubuserapp.utils.DiffCallBackUtil
 class UserRecycleAdptr : RecyclerView.Adapter<UserRecycleAdptr.UserListHolder>() {
 
     private var userList = ArrayList<Item>()
-    private var onUserClick : OnUserClick? = null
+    private var onUserClick: OnUserClick? = null
 
 
     fun setOnUserClick(listener: OnUserClick) {
@@ -64,9 +64,8 @@ class UserRecycleAdptr : RecyclerView.Adapter<UserRecycleAdptr.UserListHolder>()
     override fun getItemCount(): Int = userList.size
 
     interface OnUserClick {
-        fun onUserClicked(item : Item)
+        fun onUserClicked(item: Item)
     }
-
 
 
 }

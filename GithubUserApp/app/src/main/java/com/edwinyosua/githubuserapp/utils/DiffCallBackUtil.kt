@@ -5,7 +5,8 @@ import com.edwinyosua.githubuserapp.data.response.Item
 
 class DiffCallBackUtil(
     private val oldList: List<Item>,
-    private val newList: List<Item>): DiffUtil.Callback() {
+    private val newList: List<Item>
+) : DiffUtil.Callback() {
     override fun getOldListSize(): Int = oldList.size
 
     override fun getNewListSize(): Int = newList.size

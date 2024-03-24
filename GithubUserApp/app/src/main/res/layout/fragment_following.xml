@@ -7,7 +7,6 @@
     tools:context=".ui.fragment.FollowingFragment">
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_following"
         android:layout_width="0dp"
@@ -19,6 +18,19 @@
         tools:listitem="@layout/github_item">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+    <ProgressBar
+        android:id="@+id/progres_bar"
+        style="?android:progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible"></ProgressBar>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

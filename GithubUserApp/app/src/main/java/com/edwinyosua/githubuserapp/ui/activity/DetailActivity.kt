@@ -1,6 +1,7 @@
 package com.edwinyosua.githubuserapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -35,6 +36,8 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.prgBar.visibility = View.VISIBLE
+
         val userName = intent.getStringExtra(EXTRA_USERNAME)
 
 
@@ -59,6 +62,7 @@ class DetailActivity : AppCompatActivity() {
                     .transform(CircleCrop())
                     .into(imgDetail)
             }
+            binding.prgBar.visibility = View.GONE
         }
 
 
@@ -70,7 +74,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setTabLayout(bundle : Bundle) {
+    private fun setTabLayout(bundle: Bundle) {
         val viewPgr: ViewPager2 = binding.viewPager
         viewPgr.adapter = DetailPagerAdptr(this, bundle)
         TabLayoutMediator(binding.tabLayout, viewPgr) { tab, position ->

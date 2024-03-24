@@ -33,30 +33,29 @@ class FollowerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        binding.progresBar.visibility = View.VISIBLE
         viewMdl = ViewModelProvider(requireActivity())[DetailViewModel::class.java]
-
-
         viewMdl.getFollowerList(arguments?.getString(DetailActivity.EXTRA_USERNAME).toString())
 
         viewMdl.followerList.observe(viewLifecycleOwner) { list ->
-            adptr.submitList(list)
-        }
-
-
-        binding.rvFollower.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
+            binding.rvFollower.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                addItemDecoration(
+                    DividerItemDecoration(
+                        requireContext(),
+                        DividerItemDecoration.VERTICAL
+                    )
                 )
-            )
+            }
+            adptr.submitList(list)
+            binding.progresBar.visibility = View.GONE
         }
-
         adptr = ListDetailAdapter()
         binding.rvFollower.adapter = adptr
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
