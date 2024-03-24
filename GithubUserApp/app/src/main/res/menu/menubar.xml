@@ -8,6 +8,7 @@
             android:id="@+id/menu1"
             android:title="@string/menu_setting"
             app:showAsAction="always"
-            android:icon="@drawable/baseline_build_24"></item>
+            android:icon="@drawable/baseline_build_24">
+        </item>
     </group>
 </menu>
