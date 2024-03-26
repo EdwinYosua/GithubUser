@@ -12,6 +12,8 @@ data class GithubUserResponse(
 )
 
 data class Item(
+
+    //delete sum unuseable when u finsihed
     @SerializedName("avatar_url")
     val avatarUrl: String,
     @SerializedName("events_url")
