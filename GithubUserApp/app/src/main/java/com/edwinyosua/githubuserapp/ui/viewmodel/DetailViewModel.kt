@@ -1,9 +1,12 @@
 package com.edwinyosua.githubuserapp.ui.viewmodel
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.edwinyosua.githubuserapp.data.database.FavUserRepository
+import com.edwinyosua.githubuserapp.data.database.FavoriteUser
 import com.edwinyosua.githubuserapp.data.response.DetailUsersResponse
 import com.edwinyosua.githubuserapp.retrofit.ApiConfig
 import retrofit2.Call
@@ -11,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class DetailViewModel : ViewModel() {
+class DetailViewModel(application: Application) : ViewModel() {
 
     private val _users = MutableLiveData<DetailUsersResponse>()
     val users: LiveData<DetailUsersResponse> = _users
@@ -21,6 +24,25 @@ class DetailViewModel : ViewModel() {
 
     private val _followingList = MutableLiveData<List<DetailUsersResponse>>()
     val followingList: LiveData<List<DetailUsersResponse>> = _followingList
+
+
+    //add fav model
+    private val favUserRepo: FavUserRepository = FavUserRepository(application)
+    fun getFavUserByUsername(userName: String): LiveData<FavoriteUser> {
+        return favUserRepo.getFavUserByUsername(userName)
+    }
+
+    fun insert(favUser: FavoriteUser) {
+        favUserRepo.insert(favUser)
+    }
+
+    fun delete(favUser: FavoriteUser) {
+        favUserRepo.delete(favUser)
+    }
+
+    fun update(favUser: FavoriteUser) {
+        favUserRepo.update(favUser)
+    }
 
 
     fun loadClickedUsers(username: String) {

@@ -5,8 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class DetailUsersResponse(
 
 
-
-    //delete sum unuseable when u finsihed
+    //delete sum unusable when u finished
     @field:SerializedName("gists_url")
     val gistsUrl: String? = null,
 

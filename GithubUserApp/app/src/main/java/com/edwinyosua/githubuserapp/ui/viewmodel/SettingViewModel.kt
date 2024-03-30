@@ -8,7 +8,7 @@ import com.edwinyosua.githubuserapp.data.datastore.SettingPreferences
 import kotlinx.coroutines.launch
 
 class SettingViewModel(private val pref: SettingPreferences) : ViewModel() {
-    fun getThemeSettings() : LiveData<Boolean> {
+    fun getThemeSettings(): LiveData<Boolean> {
         return pref.getThemeSetting().asLiveData()
     }
 

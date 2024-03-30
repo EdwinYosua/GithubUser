@@ -53,7 +53,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
 
-    
+
     implementation(libs.glide)
     //apiconfig apiservice
     implementation(libs.retrofit)

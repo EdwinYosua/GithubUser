@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.edwinyosua.githubuserapp.R
+import com.edwinyosua.githubuserapp.data.datastore.SettingPreferences
+import com.edwinyosua.githubuserapp.data.datastore.dataStore
 import com.edwinyosua.githubuserapp.databinding.ActivitySettingBinding
 import com.edwinyosua.githubuserapp.ui.viewmodel.SettingViewModel
-import com.edwinyosua.githubuserapp.data.datastore.SettingPreferences
-import com.edwinyosua.githubuserapp.data.datastore.SettingViewModelFactory
-import com.edwinyosua.githubuserapp.data.datastore.dataStore
+import com.edwinyosua.githubuserapp.ui.viewmodelfactory.SettingViewModelFactory
 
 class SettingActivity : AppCompatActivity() {
 
@@ -23,10 +23,11 @@ class SettingActivity : AppCompatActivity() {
 
 
         val pref = SettingPreferences.getInstance(application.dataStore)
-        settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref)).get(SettingViewModel::class.java)
+        settingViewModel =
+            ViewModelProvider(this, SettingViewModelFactory(pref)).get(SettingViewModel::class.java)
 
         settingViewModel.getThemeSettings().observe(this) { isDarkMode: Boolean ->
-            if(isDarkMode) {
+            if (isDarkMode) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
                 binding.switchTheme.setText(R.string.dark_mode)
