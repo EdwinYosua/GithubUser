@@ -1,4 +1,4 @@
-package com.edwinyosua.githubuserapp.utils
+package com.edwinyosua.githubuserapp.data.datastore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

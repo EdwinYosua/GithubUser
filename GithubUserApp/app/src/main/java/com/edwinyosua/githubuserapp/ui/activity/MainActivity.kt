@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,16 +13,32 @@ import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.ActivityMainBinding
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
 import com.edwinyosua.githubuserapp.ui.viewmodel.MainViewModel
+import com.edwinyosua.githubuserapp.ui.viewmodel.SettingViewModel
+import com.edwinyosua.githubuserapp.data.datastore.SettingPreferences
+import com.edwinyosua.githubuserapp.data.datastore.SettingViewModelFactory
+import com.edwinyosua.githubuserapp.data.datastore.dataStore
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var userAdptr: UserRecycleAdptr
     private lateinit var viewModel: MainViewModel
+    private lateinit var settingViewModel : SettingViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        settingViewModel = ViewModelProvider(this, SettingViewModelFactory(pref))[SettingViewModel::class.java]
+
+        settingViewModel.getThemeSettings().observe(this) { isDarkMode: Boolean ->
+            if(isDarkMode) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
 
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -57,7 +74,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, SettingActivity::class.java))
                     true
                 }
-
                 else -> false
             }
         }

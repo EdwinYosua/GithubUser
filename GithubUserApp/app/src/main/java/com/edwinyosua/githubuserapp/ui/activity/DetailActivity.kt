@@ -1,5 +1,6 @@
 package com.edwinyosua.githubuserapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.StringRes
@@ -40,7 +41,6 @@ class DetailActivity : AppCompatActivity() {
 
         val userName = intent.getStringExtra(EXTRA_USERNAME)
 
-
         val bundle = Bundle().apply {
             putString(EXTRA_USERNAME, userName)
         }
@@ -64,6 +64,25 @@ class DetailActivity : AppCompatActivity() {
             }
             binding.prgBar.visibility = View.GONE
         }
+
+        //Set menu topbar
+        binding.topBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu1 -> {
+                    startActivity(Intent(this@DetailActivity, FavoriteActivity::class.java))
+                    true
+                }
+
+                R.id.menu2 -> {
+                    startActivity(Intent(this@DetailActivity, SettingActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+
     }
 
     private fun getUsersData(username: String?) {
