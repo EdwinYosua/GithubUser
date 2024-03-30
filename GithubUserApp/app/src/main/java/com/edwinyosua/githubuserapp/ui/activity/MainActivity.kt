@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edwinyosua.githubuserapp.R
 import com.edwinyosua.githubuserapp.data.response.Item
 import com.edwinyosua.githubuserapp.databinding.ActivityMainBinding
 import com.edwinyosua.githubuserapp.ui.adapter.UserRecycleAdptr
@@ -16,20 +17,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var userAdptr: UserRecycleAdptr
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-
+        //set loading
         viewModel.isLoading.observe(this) {
             showLoading(it)
         }
-
-
         //set recyclerview
         setRecycleV()
         viewModel.userListData.observe(this) { userList ->
@@ -43,6 +43,30 @@ class MainActivity : AppCompatActivity() {
         setItemClick()
 
         //Set Searchview
+        setSearchView()
+
+        //Set menu topbar
+        binding.topBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu1 -> {
+                    startActivity(Intent(this@MainActivity, FavoriteActivity::class.java))
+                    true
+                }
+
+                R.id.menu2 -> {
+                    startActivity(Intent(this@MainActivity, SettingActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+
+    }
+
+
+    private fun setSearchView() {
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
             searchView
@@ -55,7 +79,6 @@ class MainActivity : AppCompatActivity() {
                 }
         }
     }
-
 
     private fun setItemClick() {
         userAdptr.setOnUserClick(object : UserRecycleAdptr.OnUserClick {

@@ -14,4 +14,7 @@
     <string name="name">name</string>
     <string name="username">username</string>
     <string name="ttl_follower_following">999</string>
+    <string name="add_fav">add fav</string>
+    <string name="fav_menu">menu favorite\n</string>
+    <string name="dark_mode">dark mode</string>
 </resources>

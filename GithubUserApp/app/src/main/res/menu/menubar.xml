@@ -6,9 +6,15 @@
     <group android:menuCategory="container">
         <item
             android:id="@+id/menu1"
+            android:icon="@drawable/baseline_favorite_24"
             android:title="@string/menu_setting"
-            app:showAsAction="always"
-            android:icon="@drawable/baseline_build_24">
-        </item>
+            android:iconTint="@color/white"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/menu2"
+            android:icon="@drawable/baseline_build_24"
+            android:title="@string/fav_menu"
+            android:iconTint="@color/white"
+            app:showAsAction="always" />
     </group>
 </menu>

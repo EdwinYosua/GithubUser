@@ -17,7 +17,7 @@ class FollowingFragment : Fragment() {
 
 
     private var _binding: FragmentFollowingBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
     private lateinit var viewMdl: DetailViewModel
     private lateinit var adptr: ListDetailAdapter
 

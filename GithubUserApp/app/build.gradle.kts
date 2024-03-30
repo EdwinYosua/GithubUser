@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -18,7 +20,6 @@ android {
 
         buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         buildConfigField("String", "API_TOKEN", "\"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\"")
-
     }
 
     buildTypes {
@@ -45,10 +46,23 @@ android {
 
 dependencies {
 
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
+
+    //coroutines
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    
     implementation(libs.glide)
+    //apiconfig apiservice
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 
     // ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)

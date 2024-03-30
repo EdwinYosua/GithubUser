@@ -64,8 +64,6 @@ class DetailActivity : AppCompatActivity() {
             }
             binding.prgBar.visibility = View.GONE
         }
-
-
     }
 
     private fun getUsersData(username: String?) {
