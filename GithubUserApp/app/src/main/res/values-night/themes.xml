@@ -1,7 +1,34 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.GithubUserApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <item name="colorPrimary">@color/nightPrimary</item>
+        <item name="colorOnPrimary">@color/nightOnPrimary</item>
+
+        <item name="colorSecondary">@color/nightSecondary</item>
+        <item name="colorOnSecondary">@color/nightOnSecondary</item>
+
+        <item name="colorTertiary">@color/nightTertiary</item>
+        <item name="colorOnTertiary">@color/nightOnTertiary</item>
+
+        <item name="colorOnBackground">#e0e3e2</item>
+
+
     </style>
+
+    <style name="TextContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextContent.MainStyle">
+        <item name="android:textAppearance">@style/TextAppearance.Material3.HeadlineMedium</item>
+    </style>
+
+    <style name="TextContent.SecondStyle">
+        <item name="android:textAppearance">@style/TextAppearance.Material3.HeadlineMedium</item>
+    </style>
+
+    <style name="Theme.GithubUserApp" parent="Base.Theme.GithubUserApp" />
+
 </resources>

@@ -3,10 +3,27 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="blueprimary">#005cbb</color>
-    <color name="bluesecondary">#00658e</color>
-    <color name="bluetertiary">#1760a5</color>
-    <color name="whitebg">#fdfbff</color>
+
+<!--    light color-->
+    <color name="lightPrimary">#00696b</color>
+    <color name="lightSecondary">#206c24</color>
+    <color name="lightTertiary">#506601</color>
+    <color name="lightBg">#fafdfc</color>
+
+
+<!--    night color-->
+    <color name="nightPrimary">#4cdadc</color>
+    <color name="nightSecondary">#8ad982</color>
+    <color name="nightTertiary">#b6d168</color>
+    <color name="nightBg">#191c1c</color>
+
+    <color name="nightOnPrimary">#003738</color>
+    <color name="nightOnSecondary">#003908</color>
+    <color name="nightOnTertiary">#283500</color>
+    <color name="nightOnBg">#e0e3e2</color>
+
+
+
 
     <color name="OnBg">#1a1b1f</color>
 

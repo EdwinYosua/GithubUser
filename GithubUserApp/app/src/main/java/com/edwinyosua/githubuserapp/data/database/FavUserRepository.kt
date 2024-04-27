@@ -17,15 +17,16 @@ class FavUserRepository(application: Application) {
 
     fun getFavUserList(): LiveData<List<FavoriteUser>> = favUserDao.getFavUserList()
 
-    fun getFavUserByUsername(userName: String): LiveData<FavoriteUser> =
-        favUserDao.getFavoriteUserByUsername(userName)
+    fun getFavUserByUsername(userName: String): LiveData<FavoriteUser> = favUserDao.getFavoriteUserByUsername(userName)
 
     fun insert(favoriteUser: FavoriteUser) {
         execService.execute { favUserDao.insert(favoriteUser) }
     }
 
     fun delete(favoriteUser: FavoriteUser) {
-        execService.execute { favUserDao.delete(favoriteUser) }
+        execService.execute {
+            favUserDao.delete(favoriteUser)
+        }
     }
 
     fun update(favoriteUser: FavoriteUser) {

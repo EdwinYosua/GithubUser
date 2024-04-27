@@ -11,4 +11,20 @@ class FavoriteUserViewModel(application: Application) : ViewModel() {
     private val favUserRepo: FavUserRepository = FavUserRepository(application)
 
     fun getFavUserList(): LiveData<List<FavoriteUser>> = favUserRepo.getFavUserList()
+
+    fun getFavUserByUsername(userName: String): LiveData<FavoriteUser> {
+        return favUserRepo.getFavUserByUsername(userName)
+    }
+
+    fun insert(favUser: FavoriteUser) {
+        favUserRepo.insert(favUser)
+    }
+
+    fun delete(favUser: FavoriteUser) {
+        favUserRepo.delete(favUser)
+    }
+
+
+
+
 }

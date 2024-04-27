@@ -3,7 +3,6 @@ package com.edwinyosua.githubuserapp.ui.viewmodelfactory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.edwinyosua.githubuserapp.ui.viewmodel.DetailViewModel
 import com.edwinyosua.githubuserapp.ui.viewmodel.FavoriteUserViewModel
 
 class FavViewModelFactory private constructor(private val mApp: Application) :
@@ -27,9 +26,10 @@ class FavViewModelFactory private constructor(private val mApp: Application) :
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FavoriteUserViewModel::class.java)) {
             return FavoriteUserViewModel(mApp) as T
-        } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(mApp) as T
         }
+//        else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+//            return DetailViewModel(mApp) as T
+//        }
         throw IllegalArgumentException("Unknown Viewmodel Class : ${modelClass.name}")
     }
 }

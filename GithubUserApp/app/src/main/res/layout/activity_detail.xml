@@ -65,11 +65,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:background="?attr/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txv_user_name"
-                app:tabTextColor="@color/white" />
+
+                />
 
 
             <TextView
@@ -128,7 +128,7 @@
         app:fabSize="normal"
         app:layout_anchor="@id/view_pager"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/baseline_favorite_24">
+        app:srcCompat="@drawable/baseline_favorite_border_24">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

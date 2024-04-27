@@ -14,32 +14,32 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("search/users")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun searchUsersList(
         @Query("q") query: Editable
     ): Call<GithubUserResponse>
 
     @GET("users")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getAllUserList(
         @Query("per_page") perPage: Int,
         @Query("since") sinceUserId: Int,
     ): Call<List<Item>>
 
     @GET("users/{username}")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getClickedUser(
         @Path("username") username: String
     ): Call<DetailUsersResponse>
 
     @GET("users/{username}/followers")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getFollowers(
         @Path("username") username: String
     ): Call<List<DetailUsersResponse>>
 
     @GET("users/{username}/following")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getFollowing(
         @Path("username") username: String
     ): Call<List<DetailUsersResponse>>

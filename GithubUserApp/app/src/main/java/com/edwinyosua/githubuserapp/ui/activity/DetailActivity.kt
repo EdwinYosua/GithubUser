@@ -15,6 +15,7 @@ import com.edwinyosua.githubuserapp.data.database.FavoriteUser
 import com.edwinyosua.githubuserapp.databinding.ActivityDetailBinding
 import com.edwinyosua.githubuserapp.ui.adapter.DetailPagerAdptr
 import com.edwinyosua.githubuserapp.ui.viewmodel.DetailViewModel
+import com.edwinyosua.githubuserapp.ui.viewmodel.FavoriteUserViewModel
 import com.edwinyosua.githubuserapp.ui.viewmodelfactory.FavViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -34,7 +35,9 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewMdl: DetailViewModel
-
+    private lateinit var favViewModel: FavoriteUserViewModel
+    private lateinit var favUserName: String
+    private lateinit var favAvatarUrl: String
 
     private var buttonState: Boolean = false
     private var favUser: FavoriteUser? = null
@@ -54,8 +57,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
-//        viewMdl = ViewModelProvider(this)[DetailViewModel::class.java]
-        viewMdl = obtainViewModel(this@DetailActivity)
+        viewMdl = ViewModelProvider(this)[DetailViewModel::class.java]
+        favViewModel = obtainViewModel(this@DetailActivity)
 
 
         //Set Tablayout Viewpager
@@ -77,14 +80,37 @@ class DetailActivity : AppCompatActivity() {
             }
             binding.prgBar.visibility = View.GONE
 
-            favUser = FavoriteUser()
-            favUser?.let {
-                favUser?.userName = user.login.toString()
-                favUser?.avatarUrl = user.avatarUrl
-            }
-
-
+            favUserName = user.login.toString()
+            favAvatarUrl = user.avatarUrl.toString()
+            favUser = FavoriteUser(userName = favUserName, avatarUrl = favAvatarUrl)
         }
+
+        //set favorite function
+        if (userName != null) {
+            favViewModel.getFavUserByUsername(userName).observe(this) { favoriteUser ->
+                if (favoriteUser != null) {
+                    buttonState = true
+                    binding.favButton.setImageResource(R.drawable.baseline_favorite_24)
+                }
+                binding.favButton.setOnClickListener {
+                    if (!buttonState) {
+                        //adding fav user
+                        buttonState = true
+                        binding.favButton.setImageResource(R.drawable.baseline_favorite_24)
+                        favViewModel.insert(favUser as FavoriteUser)
+                        showToast("User Ditambahkan ke Favorit")
+                    } else {
+                        //delete fav user
+                        buttonState = false
+                        binding.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
+                        favViewModel.delete(favoriteUser)
+                        showToast("User Dihapus dari Favorit")
+                    }
+                }
+            }
+        }
+
+
 
         //Set menu topbar
         binding.topBar.setOnMenuItemClickListener { menuItem ->
@@ -102,60 +128,16 @@ class DetailActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
-        if (userName != null) {
-            viewMdl.getFavUserByUsername(userName).observe(this) { favoriteUser ->
-                if (favoriteUser != null && favoriteUser.userName == userName) {
-                    buttonState = true
-                    binding.favButton.setImageResource(R.drawable.baseline_favorite_24)
-                } else {
-                    buttonState = false
-                    binding.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
-                }
-
-                binding.favButton.setOnClickListener {
-                    if (!buttonState) {
-                        buttonState = true
-                        binding.favButton.setImageResource(R.drawable.baseline_favorite_24)
-                        viewMdl.insert(favUser as FavoriteUser)
-                    } else {
-                        buttonState = false
-                        binding.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
-                        viewMdl.delete(favUser as FavoriteUser)
-                    }
-                }
-            }
-        }
     }
-
-//
-//        binding.favButton.setOnClickListener {
-//            if (!buttonState) {
-//                buttonState = true
-//                binding.favButton.setImageResource(R.drawable.baseline_favorite_24)
-//                favUser.let {
-//                    favUser?.userName = favUserName
-//                    favUser?.avatarUrl = favAvatarUrl
-//                }
-//                viewMdl.insert(favUser as FavoriteUser)
-//            }
-//            else {
-//                buttonState = false
-//                binding.favButton.setImageResource(R.drawable.baseline_favorite_border_24)
-//                viewMdl.delete(favUser as FavoriteUser)
-//            }
-//
-//        }
 
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun obtainViewModel(activity: AppCompatActivity): DetailViewModel {
+    private fun obtainViewModel(activity: AppCompatActivity): FavoriteUserViewModel {
         val factory = FavViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory)[DetailViewModel::class.java]
+        return ViewModelProvider(activity, factory)[FavoriteUserViewModel::class.java]
     }
 
     private fun getUsersData(username: String?) {
@@ -172,4 +154,5 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
         supportActionBar?.elevation = 0f
     }
+
 }

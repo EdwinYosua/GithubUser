@@ -2,14 +2,16 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.GithubUserApp" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <item name="colorPrimary">@color/blueprimary</item>
+        <item name="colorPrimary">@color/lightPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
 
-        <item name="colorSecondary">@color/bluesecondary</item>
+        <item name="colorSecondary">@color/lightSecondary</item>
         <item name="colorOnSecondary">@color/white</item>
 
-        <item name="colorTertiary">@color/bluetertiary</item>
+        <item name="colorTertiary">@color/lightTertiary</item>
         <item name="colorOnTertiary">@color/white</item>
+
+        <item name="colorOnBackground">@color/black</item>
     </style>
 
     <style name="TextContent">
@@ -22,7 +24,6 @@
     </style>
 
     <style name="TextContent.SecondStyle">
-        <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/TextAppearance.Material3.HeadlineMedium</item>
     </style>
 
